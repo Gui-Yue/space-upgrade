@@ -25,9 +25,10 @@ all: exe
 exe: $(SOURCES) Makefile
 	echo "building..."
 	go env -w GO111MODULE=on
+	go env -w GOPROXY=https://goproxy.cn,direct
 	go get github.com/pkg/errors
 	go get github.com/dungeonsnd/gocom/...
-	GOOS=linux GOARCH=${ARCH} go build $(OPTIONS) $(LDFLAGS) -o build/$(NAME)
+	GOOS=linux GOARCH=${ARCH} go build -buildvcs=false $(OPTIONS) $(LDFLAGS) -o build/$(NAME)
 
 .PHONY: clean
 clean:
